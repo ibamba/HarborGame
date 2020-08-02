@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Harbor</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="to_continue">Continue</string>
+
+    <string name="gotogame">Game</string>
+    <string name="gotoprofil">Profile</string>
+    <string name="gotostats">Statistics</string>
+
+    <string name="pseudo">Pseudo</string>
+    <string name="text_score">Your max score : </string>
+    <string name="default_score">Your max score : 0 !</string>
+    <string name="default_motto">Your motto here !</string>
+
+    <string name="warning">Warning !</string>
+    <string name="info">Information !</string>
+    <string name="empty_profile">You have not yet defined your profile.
+        You currently have a default profile.
+        Please note, results and stats are not saved for default profile</string>
+    <string name="load_failed">Failed to load some data. Default values have been initialized.
+    </string>
+    <string name="save_failed">Failed to save some data. This data will be lost.</string>
+    <string name="image_failed">Failed to load Image. Default image has been initialized !</string>
+
+    <string name="header_stats">Statistics</string>
+    <string name="header_title">Username | date | Level-name | Score | Time(sec)</string>
+    <string name="sort_name">Sort by Username</string>
+    <string name="sort_date">Sort by Date</string>
+    <string name="sort_level">Sort by Level Name</string>
+    <string name="sort_parked">Sort by Number Parked</string>
+    <string name="sort_time">Sort by Time</string>
+
+    <string name="level_name">Level Name</string>
+    <string name="level_diff">Level Difficulty</string>
+    <string name="level_nb_park">Number to park</string>
+    <string name="level_nb_parked">Number parked</string>
+    <string name="score">Your score</string>
+    <string name="best_score">Your best score</string>
+
+    <string name="level_confirm">Do you want to continue?</string>
+    <string name="win">Congrats !!! You win, you parked all boats of this level.
+        Thanks to try another level</string>
+    <string name="lose_boat">You lose. Boats collision between boats number</string>
+    <string name="lose_harbor">You lose. Harbor collision for boat number</string>
+
+    <string name="to_leave">Are you sure you want to leave this part? The game will be lost!</string>
+
+    <string name="background_desc">Background image </string>
+    <string name="button_profile_desc">Towards profile management</string>
+    <string name="button_stats_desc">Towards users statistics</string>
+    <string name="button_game_desc">Towards choice of game level</string>
+
+    <string name="copyright">Copyright : ibrahim–Bamba–M2–2020</string>
+    <string name="copyright_desc">Copyright</string>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100" >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:border_width="1dp"
+        app:border_color="#000000"
+        android:layout_gravity="center"
+        android:id="@+id/profileImage"
+        android:layout_weight="40" />
+    <!--Replace layout width and height of Circle view by this for generic and adaptable size
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"-->
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/pseudo"
+        android:id="@+id/textPseudo"
+        android:ems="10"
+        android:layout_weight="10" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_score"
+        android:id="@+id/textScore"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="30"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textShortMessage|textAutoComplete|textAutoCorrect"
+        android:text="@string/default_motto"
+        android:id="@+id/text_motto"
+        android:ems="10"
+        android:textStyle="bold|italic"
+        android:layout_weight="10" />
+
+</LinearLayout>
