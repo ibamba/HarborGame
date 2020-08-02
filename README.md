@@ -42,25 +42,25 @@ C'est l'activité la plus importante du jeu. Elle contient le jeu en lui même. 
 
 C'est le Model du Jeu. Il est totalement indépendant dans la vue. Il contient toutes les données du jeu et les fonctions permettant de les manipuler.
 
-'Boat' : La classe Boat est une classe interne à GameModel. C'est la classe qui défini les bateaux. Un bateau est défini par sa position précédente (PointF prec), sa position courante (PointF cur), sa couleur, une liste des prochains points à suivre (LinkedList<>PointF path) et un boolean permettant de savoir s'il est encore dans la mer ou non (isOn). A l'initialisation, isOn est toujours à true.
+*Boat* : La classe Boat est une classe interne à GameModel. C'est la classe qui défini les bateaux. Un bateau est défini par sa position précédente (PointF prec), sa position courante (PointF cur), sa couleur, une liste des prochains points à suivre (LinkedList<>PointF path) et un boolean permettant de savoir s'il est encore dans la mer ou non (isOn). A l'initialisation, isOn est toujours à true.
 
-**Les Attributs** : GameModel contient les coordonnées et la taille du rivage, les coordonnées des ports et leurs couleurs, un tableau de bateau qui représente tous les bateaux de ce niveau, etc... Le tableau des bateaux est seulement alloué dans le constructeur. A chaque fois qu'un nouveau bateau est envoyé dans la mer, sa case dans le tableau est initialisé.
+*Les Attributs* : GameModel contient les coordonnées et la taille du rivage, les coordonnées des ports et leurs couleurs, un tableau de bateau qui représente tous les bateaux de ce niveau, etc... Le tableau des bateaux est seulement alloué dans le constructeur. A chaque fois qu'un nouveau bateau est envoyé dans la mer, sa case dans le tableau est initialisé.
 
-'newBoat' : envoie un nouveau bateau dans la mer. On choisit aléatoirement le côté et la position où apparaîtra le bateau. Puis on initialise la case courante du tableau des bateaux au nouveau bateau.
+*newBoat* : envoie un nouveau bateau dans la mer. On choisit aléatoirement le côté et la position où apparaîtra le bateau. Puis on initialise la case courante du tableau des bateaux au nouveau bateau.
 
-'moveBoat' : déplace tous les bateaux en mer (en vérifiant l'attribut isOn). Le déplacement se fait comme suit : si un path a été défini par l'utilisateur pour ce bateau (path est non vide), alors on poll le premier point de path et on set la position du bateau à ce pont. Sinon, la nouvelle position du bateau est égale à la position courante + la position courante moins la position précédente le tout modulo la taille de la Vue.
+*moveBoat* : déplace tous les bateaux en mer (en vérifiant l'attribut isOn). Le déplacement se fait comme suit : si un path a été défini par l'utilisateur pour ce bateau (path est non vide), alors on poll le premier point de path et on set la position du bateau à ce pont. Sinon, la nouvelle position du bateau est égale à la position courante + la position courante moins la position précédente le tout modulo la taille de la Vue.
 
-'delivery' : teste si un bateau a été parké. On teste si la position du bateau est dans l'un des quays de la même couleur que lui. Pour cela, on utilise la méthode RectF.contains.
+*delivery* : teste si un bateau a été parké. On teste si la position du bateau est dans l'un des quays de la même couleur que lui. Pour cela, on utilise la méthode RectF.contains.
 
-'collision' : teste s'il y a collision pour l'un des bateaux ou non. Dans un premier temps, on teste, pour tous les bateaux en mer, si deux d'entre eux s'intersecte. Pour cela, on utilise la méthode RectF.intersect car les bateaux sont considérés comme des rectangle. Dans un second temps, on teste si l'un des bateaux en mer entre en collision avec le rivage. Pour cela, on teste si la postion du bateaux appartient au cercle qui représente le rivage.
+*collision* : teste s'il y a collision pour l'un des bateaux ou non. Dans un premier temps, on teste, pour tous les bateaux en mer, si deux d'entre eux s'intersecte. Pour cela, on utilise la méthode RectF.intersect car les bateaux sont considérés comme des rectangle. Dans un second temps, on teste si l'un des bateaux en mer entre en collision avec le rivage. Pour cela, on teste si la postion du bateaux appartient au cercle qui représente le rivage.
 
-'boatSelected' : avec les coordonnées X et Y d'un point, vérifie si ces coordonnées coincide avec celles de l'un des bateaux en mer. Dans ce cas, le bateau en question est sélectionné par l'utilisateur.
+*boatSelected* : avec les coordonnées X et Y d'un point, vérifie si ces coordonnées coincide avec celles de l'un des bateaux en mer. Dans ce cas, le bateau en question est sélectionné par l'utilisateur.
 
-'addPath' : si un bateau a été sélectionné, ajoute les coordonnées au chemin à suivre par le bateau.
+*addPath* : si un bateau a été sélectionné, ajoute les coordonnées au chemin à suivre par le bateau.
 
 ##### Les fonctionnalités du GameActivity
 
-'GroundLevel1' : C'est une classe interne à GameActivity qui hérite de View et déssine le terrain du jeu. Les coordonnées des ports et des quays de rivage sont définis dans GameModel. GroundLevel1 détecte aussi les actions de l'utilisateur sur l'écran, permettant ainsi de définir des chemins à suivre pour les bateaux. Lorsque ACTION_DOWN puis ACTION_MOVE est détecté, on construit un path et on ajoute les coordonnées X et Y à la liste path du bateau sélectionné.
+*GroundLevel1* : C'est une classe interne à GameActivity qui hérite de View et déssine le terrain du jeu. Les coordonnées des ports et des quays de rivage sont définis dans GameModel. GroundLevel1 détecte aussi les actions de l'utilisateur sur l'écran, permettant ainsi de définir des chemins à suivre pour les bateaux. Lorsque ACTION_DOWN puis ACTION_MOVE est détecté, on construit un path et on ajoute les coordonnées X et Y à la liste path du bateau sélectionné.
 
 Pour toutes les fonctionnalités du jeu, on utilise la méthode Timer.scheduleAtFixedRate. Ainsi, la GameActivity contient six handler : timeHandler pour le chronométrage et son affichage, launchHandler pour lancer de nouveaux bateaux en mer, moveHandler pour déplacer les bateaux, parkHandler pour garer les bateaux correctement dans les quays, remHandler pour lancer le mécanisme de suppression des bateaux de la vue et endHandler pour terminer le jeu. GameActivity contient son propre tableau des bateaux qui est ici un tableau de ImageView. Ce tableau a la même taille que celui du model net ces éléments sont localisés exactement à la même position que leur correspondant dans le model. Voici maintenant le déroulement globale du jeu :
 après avoir initialisé tous ses attributs, la GameActivity lance un thread pour s'occuper du jeu (GameThread). Ce thread crée trois TimerTask : le TimerTask pour le chrono qui a une période d'une seconde, celui pour le déplacement des bateaux qui a une période 50 millisecondes et celui pour envoyer de nouveaux bateaux dans la mer qui a une période de 5 secondes. On lance un premier bateau dans la mer, chaque 50 millisecondes on demande au GameModel de déplacer les bateaux, on met à jour ensuite les nouvelles positions dans la vue. Une fois les déplacements fait, on vérifie si l'un des bateaux a été parké. Si oui, on lance la procédure de parkage puis de suppression du bateau. La procédure de suppression est un nouveau thread qui laisse le bateau garé dans le quay pendant 5 s puis le supprime. On vérifie ensuite si tous les bateaux ont été parkés. Si c'est le cas, le jeu est fini, le joueur a gagné. On lance la procédure de fin. Si aucun bateau n'a été parké, on vérifie s'il y a collision. Si oui, on arrête, le joueur a perdu. On lance la procédure de fin. La procédure de fin consiste à afficher un AlertDialog présentant les statistiques du joueur pour ce jeu. Le joueur est ensuite redirigé vers la MapsActivity. Notez que toutes les procédures de vérifications sont faites par le GameModel. Chaque 5 secondes, seulement si tous les bateaux n'ont pas encore été envoyé en mer et que le nombre de bateaux actuellement en mer ne dépasse pas le nombre de bateaux maximale à être en mer au même moment, on demande au model d'envoyer un nouveau bateau en mer puis on crée le bateau correspondant dans la vue.
@@ -71,6 +71,7 @@ A la fin de cette activité, on envoie la nouvelle statistique du joueur et le m
 ## LES OPTIONS
 
 Nous avons implémenté les options suivants :
+
 **Persistance des données** : lorsque l'utilisateur quitte le jeu, on sauvegarde les données utilisateur (le User, qui est sérialisable) dans un fichier user.txt et les statistiques (dans stats.txt) permettant ainsi de ne perdre aucune information du jeu (voir MainModel.java).
 
 **Tri des résultats** : Comme expliqué plus haut, nous trions les résultats selon toutes les composantes disponibles (voir ProfileActivity.java).
@@ -82,4 +83,5 @@ La principale difficulté rencontrée tout au long du projet est la non maîtris
 
 ## Auteur
 [BAMBA Ibrahim](https://www.linkedin.com/in/ibrahim-bamba-885a05115)
+
 ikader737@gmail.com
